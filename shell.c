@@ -1,42 +1,4 @@
-#include <unistd.h>
-#include <sys/wait.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-/**
- * split - turns user input into tokens
- * @input: the user's input
- * @args: the array for each token
- */
-void split(char *input, char **args)
-{
-	char *token = strtok(input, " ");
-	int i = 0;
-
-	while (token != NULL)
-	{
-		args[i++] = token;
-		token = strtok(NULL, " ");
-	}
-	args[i] = NULL;
-}
-
-/**
- * _process - runs the child processes
- * @path: the string with the path '/bin/'
- * @args: the tokens
- */
-void _process(char *path, char **args)
-{
-	if (fork() == 0)
-	{
-		execve(path, args, NULL);
-		perror("execve error");
-		exit(EXIT_FAILURE);
-	} else
-		wait(NULL);
-}
+#include "main.h"
 
 /**
  * main - Entry point
