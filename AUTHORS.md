@@ -2,4 +2,4 @@
 # To this shell program
 
 - John-Livingproof Fowowe <johnlivingprooff@gmail.com>
-- Obed Nwachukwu <yourEmailAddress>
+- Obed Nwachukwu <nwachukwobed@gmail.com>
