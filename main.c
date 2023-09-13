@@ -2,10 +2,11 @@
 
 /**
  * main - Entry point
- *
+ * @ac: counter
+ * @av: arg vector
  * Return: 0 - Success
  */
-int main(void)
+int main(int ac __attribute__((unused)), char **av)
 {
 	char input[BUFFER];
 
@@ -18,7 +19,7 @@ int main(void)
 		if (strcmp(input, "exit\n") == 0)
 			exit(0);
 		/* executes user command */
-		executeInput(input);
+		executeInput(input, av);
 	}
 
 	return (0);

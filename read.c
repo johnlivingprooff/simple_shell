@@ -8,8 +8,5 @@
 void readInput(char *input, size_t size)
 {
 	if (fgets(input, size, stdin) == NULL)
-	{
-		perror("failed to read input");
 		exit(EXIT_FAILURE);
-	}
 }

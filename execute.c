@@ -3,8 +3,9 @@
 /**
  * executeInput - executes the users commands
  * @cmds: the user input
+ * @av: arg vector
  */
-void executeInput(char *cmds)
+void executeInput(char *cmds, char **av)
 {
 	char *args[BUFFER];
 	int status;
@@ -27,9 +28,13 @@ void executeInput(char *cmds)
 		}
 		args[count] = NULL;
 		_environ(envp);
-		execve(args[0], args, envp);
-		perror("execve");
-		exit(EXIT_FAILURE);
+		if (strchr(args[0], '/') != NULL)
+		{
+			execve(args[0], args, envp);
+			perror(av[0]);
+			exit(EXIT_FAILURE);
+		} else
+			npath(envp, args);
 	} else
 		waitpid(_child, &status, 0);
 }
