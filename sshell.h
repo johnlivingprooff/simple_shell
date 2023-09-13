@@ -12,6 +12,6 @@
 
 void readInput(char *input, size_t size);
 void executeInput(char *cmds);
-void envi(char **envp);
+void _environ(char **envp);
 
 #endif /*SSHELL_H*/

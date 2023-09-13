@@ -1,28 +1,35 @@
 #include "sshell.h"
 
 /**
- * envi - the environment process
- * @envp: the array of env vars
+ * executeInput - executes the users commands
+ * @cmds: the user input
  */
-void envi(char **envp)
+void executeInput(char *cmds)
 {
-	int count = 0;
-	char line[BUFFER];
-	FILE *envFile = fopen("/etc/environment", "r");
+	char *args[BUFFER];
+	int status;
+	size_t count = 0;
+	pid_t _child = fork();
+	char *token;
+	char *envp[BUFFER];
 
-	if (envFile == NULL)
+	if (_child == -1)
 	{
-		perror("Error accessing /etc/environment");
-		return;
-	}
-
-	while (fgets(line, BUFFER, envFile))
+		perror("process failed");
+		exit(EXIT_FAILURE);
+	} else if (_child == 0)
 	{
-		/* remove new line, and add \0 */
-		line[strcspn(line, "\n")] = '\0';
-		/* populate the envp array */
-		envp[count++] = line;
-	}
-	envp[count] = NULL;
-	fclose(envFile);
+		token = strtok(cmds, " \n");
+		while (token != NULL)
+		{
+			args[count++] = token;
+			token = strtok(NULL, " \n");
+		}
+		args[count] = NULL;
+		_environ(envp);
+		execve(args[0], args, envp);
+		perror("execve");
+		exit(EXIT_FAILURE);
+	} else
+		waitpid(_child, &status, 0);
 }
