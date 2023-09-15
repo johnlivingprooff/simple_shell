@@ -7,6 +7,5 @@
  */
 void readInput(char *input, size_t size)
 {
-	if (fgets(input, size, stdin) == NULL)
-		exit(EXIT_FAILURE);
+	if(getline() == -1)
 }
