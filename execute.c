@@ -30,9 +30,11 @@ void executeInput(char *cmds, char **av)
 		_environ(envp);
 		if (strchr(args[0], '/') != NULL)
 		{
-			execve(args[0], args, envp);
-			perror(av[0]);
-			exit(EXIT_FAILURE);
+			if (execve(args[0], args, envp) == -1)
+			{
+				perror(av[0]);
+				exit(EXIT_FAILURE);
+			}
 		} else
 			npath(envp, args);
 	} else

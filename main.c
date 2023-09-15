@@ -16,7 +16,7 @@ int main(int ac __attribute__((unused)), char **av)
 		/* collects user input */
 		readInput(input, sizeof(input));
 
-		if (strcmp(input, "exit\n") == 0)
+		if (strcmp(input, "exit") == 0)
 			exit(0);
 		/* executes user command */
 		executeInput(input, av);

@@ -1,14 +1,14 @@
 #include "sshell.h"
 
 /**
- * npath - handles PATH, when cmd isn't a path
- * like '/bin/'
+ * npath - handles PATH, when cmd isn't a path like '/bin/'
  * @envp: the env pointer
  * @args: array of commands
  */
 void npath(char **envp, char **args)
 {
 	char *token, *path = getenv("PATH");
+	char buffer[BUFFER];
 
 	if (path == NULL)
 	{
@@ -19,10 +19,10 @@ void npath(char **envp, char **args)
 	token = strtok(path, ":");
 	while (token != NULL)
 	{
-		snprintf(envp[0], BUFFER, "%s/%s", token, args[0]);
-		execve(envp[0], args, envp);
+		snprintf(buffer, sizeof(buffer), "%s/%s", token, args[0]);
+		execve(buffer, args, envp);
 		token = strtok(NULL, ":");
 	}
-	perror("");
+	perror("execve");
 	exit(EXIT_FAILURE);
 }

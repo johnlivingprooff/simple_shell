@@ -7,5 +7,11 @@
  */
 void readInput(char *input, size_t size)
 {
-	if(getline() == -1)
+	if (getline(&input, &size, stdin) == -1)
+	{
+		perror("getline");
+		exit(EXIT_FAILURE);
+	}
+	if (input[strlen(input) - 1] == '\n')
+		input[strlen(input) - 1] = '\0';
 }
