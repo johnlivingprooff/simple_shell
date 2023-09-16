@@ -5,10 +5,10 @@
  * @cmds: the user input
  * @av: arg vector
  */
-void executeInput(char *cmds, char **av)
+int executeInput(char *cmds, char **av)
 {
 	char *args[BUFFER];
-	int status;
+	int status, wxit;
 	size_t count = 0;
 	pid_t _child = fork();
 	char *token;
@@ -36,7 +36,15 @@ void executeInput(char *cmds, char **av)
 				exit(EXIT_FAILURE);
 			}
 		} else
-			npath(envp, args);
+			npath(envp, args, av);
 	} else
+	{
 		waitpid(_child, &status, 0);
+
+		if (WIFEXITED(status))
+			wxit = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			return (WTERMSIG(status));
+	}
+	return (wxit);
 }

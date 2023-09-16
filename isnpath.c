@@ -4,8 +4,9 @@
  * npath - handles PATH, when cmd isn't a path like '/bin/'
  * @envp: the env pointer
  * @args: array of commands
+ * @av: for the executable name
  */
-void npath(char **envp, char **args)
+void npath(char **envp, char **args, char **av)
 {
 	char *token, *path = getenv("PATH");
 	char buffer[BUFFER];
@@ -23,6 +24,6 @@ void npath(char **envp, char **args)
 		execve(buffer, args, envp);
 		token = strtok(NULL, ":");
 	}
-	perror("execve");
+	perror(av[0]);
 	exit(EXIT_FAILURE);
 }

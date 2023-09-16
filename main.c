@@ -9,18 +9,24 @@
 int main(int ac __attribute__((unused)), char **av)
 {
 	char input[BUFFER];
+	int interactive = isatty(STDIN_FILENO);
+	int estat;
 
 	while (1)
 	{
-		printf("($) ");
+		if (interactive)
+			printf("($) "); /* only prints in interactive mode */
+
 		/* collects user input */
-		readInput(input, sizeof(input));
+		if (!readInput(input, sizeof(input)))
+			break; /* exit loop on EOF */
 
 		if (strcmp(input, "exit") == 0)
-			exit(0);
+			exit(EXIT_SUCCESS);
+
 		/* executes user command */
-		executeInput(input, av);
+		estat = executeInput(input, av);
 	}
 
-	return (0);
+	return (estat);
 }

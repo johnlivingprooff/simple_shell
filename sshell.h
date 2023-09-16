@@ -10,9 +10,9 @@
 
 #define BUFFER 80
 
-void readInput(char *input, size_t size);
-void executeInput(char *cmds, char **av);
+int readInput(char *input, size_t size);
+int executeInput(char *cmds, char **av);
 void _environ(char **envp);
-void npath(char **envp, char **args);
+void npath(char **envp, char **args, char **av);
 
 #endif /*SSHELL_H*/
