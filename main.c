@@ -4,9 +4,10 @@
  * main - Entry point
  * @ac: counter
  * @av: arg vector
+ * @env: the environ variable
  * Return: 0 - Success
  */
-int main(int ac __attribute__((unused)), char **av)
+int main(int ac __attribute__((unused)), char **av, char **env)
 {
 	char input[BUFFER];
 	int interactive = isatty(STDIN_FILENO);
@@ -25,7 +26,7 @@ int main(int ac __attribute__((unused)), char **av)
 			exit(EXIT_SUCCESS);
 
 		/* executes user command */
-		estat = executeInput(input, av);
+		estat = executeInput(input, av, env);
 	}
 
 	return (estat);
