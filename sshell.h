@@ -1,16 +1,18 @@
-#ifndef SIMPLE_SHELL_H
-#define SIMPLE_SHELL_H
+#ifndef SSHELL_H
+#define SSHELL_H
 
-#include <unistd.h>
-#include <sys/wait.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
-/* prototypes */
-void split(char *input, char **args);
-void _process(char *path, char **args);
-char *_strtok(char *str, const char *delim);
-int child(char *fullpath, char **tokens);
+#define BUFFER 80
 
-#endif /* MAIN_H */
+int readInput(char *input, size_t size);
+int executeInput(char *cmds, char **av, char **env);
+void _environ(char **envp, char **env);
+void npath(char **envp, char **args, char **av);
+
+#endif /*SSHELL_H*/
