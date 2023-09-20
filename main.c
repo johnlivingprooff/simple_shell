@@ -24,7 +24,7 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 			/* exit loop on EOF or invalid input */
 			if (interactive)
 				printf("\n");
-			break;
+			exit(0);
 		}
 
 		if (strcmp(input, "exit") == 0)
