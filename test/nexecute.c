@@ -2,13 +2,13 @@
 #include <errno.h>
 
 /**
- * executeInput - executes the users commands
+ * nexecuteInput - executes the users commands
  * @cmds: the user input
  * @av: arg vector
  * @env: the env variable
  * Return: exit status
  */
-int executeInput(char *cmds, char **av, char **env)
+int nexecuteInput(char *cmds, char **av, char **env)
 {
 	char *args[BUFFER];
 	int status, wxit;
@@ -39,9 +39,9 @@ int executeInput(char *cmds, char **av, char **env)
 				else
 					perror(av[0]);
 				exit(EXIT_FAILURE);
-			}
-		} else
-			npath(envp, args, av);
+			} else
+				fprintf(stderr, "%s: 1: %s: not found\n", av[0], args[0]);
+		}
 	} else
 	{waitpid(_child, &status, 0);
 		if (WIFEXITED(status))

@@ -24,6 +24,9 @@ void npath(char **envp, char **args, char **av)
 		execve(buffer, args, envp);
 		token = strtok(NULL, ":");
 	}
-	perror(av[0]);
+	if (errno == ENOENT)
+		fprintf(stderr, "%s: 1: %s: not found\n", av[0], args[0]);
+	else
+		perror(av[0]);
 	exit(EXIT_FAILURE);
 }

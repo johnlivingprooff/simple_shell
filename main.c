@@ -20,7 +20,12 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 
 		/* collects user input */
 		if (!readInput(input, sizeof(input)))
-			break; /* exit loop on EOF */
+		{
+			/* exit loop on EOF or invalid input */
+			if (interactive)
+				printf("\n");
+			break;
+		}
 
 		if (strcmp(input, "exit") == 0)
 			exit(EXIT_SUCCESS);
