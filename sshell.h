@@ -9,7 +9,7 @@
 #include <sys/wait.h>
 #include <errno.h>
 
-#define BUFFER 10240
+#define BUFFER 51200
 
 int readInput(char *input, size_t size);
 int executeInput(char *cmds, char **av, char **env);
