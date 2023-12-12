@@ -24,11 +24,11 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 			/* exit loop on EOF or invalid input */
 			if (interactive)
 				printf("\n");
-			exit(0);
+			return (0);
 		}
 
 		if (strcmp(input, "exit") == 0)
-			exit(EXIT_SUCCESS);
+			return (EXIT_SUCCESS);
 
 		/* executes user command */
 		estat = executeInput(input, av, env);
